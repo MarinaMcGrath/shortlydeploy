@@ -3,7 +3,7 @@ var crypto = require('crypto');
 var Link = require('../config').Link;
 
 
-var link = new Link({url: 'test_url'});
+var link = new Link();
 
 
 link.save()

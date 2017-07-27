@@ -19,27 +19,32 @@ let urlsSchema = new Schema({
   baseUrl: String,
   code: String,
   title: String,
-  visits: Number,
+  visits: Number
 });  
 var Link = mongoose.model('Link', urlsSchema);
 
+let usersSchema = new Schema({
+  username: String,
+  password: String
+});
+var User = mongoose.model('User', usersSchema);
 
-
-
-// let usersSchema = new Schema ({
-//   _id: Number,
-//   username: {
-//     type: String,
-//     unique: true
-//   },
-//   password: String,
+// db.knex.schema.hasTable('users').then(function(exists) {
+//   if (!exists) {
+//     db.knex.schema.createTable('users', function (user) {
+//       user.increments('id').primary();
+//       user.string('username', 100).unique();
+//       user.string('password', 100);
+//       user.timestamps();
+//     }).then(function (table) {
+//       console.log('Created Table', table);
+//     });
+//   }
 // });
-// });
-
-
 
 
 module.exports.db = db;
+module.exports.User = User;
 module.exports.Link = Link;
 // module.exports = database;
 
@@ -64,15 +69,3 @@ module.exports.Link = Link;
 //   }
 // });
 
-db.knex.schema.hasTable('users').then(function(exists) {
-  if (!exists) {
-    db.knex.schema.createTable('users', function (user) {
-      user.increments('id').primary();
-      user.string('username', 100).unique();
-      user.string('password', 100);
-      user.timestamps();
-    }).then(function (table) {
-      console.log('Created Table', table);
-    });
-  }
-});
