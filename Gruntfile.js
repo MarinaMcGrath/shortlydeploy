@@ -51,6 +51,11 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: [
+          'git add .',
+          'git commit -m "Update"',
+          'git push live master'
+        ].join('&&')
       }
     },
   });
@@ -64,13 +69,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
 
-  grunt.registerTask('server-dev', function (target) {
-    grunt.task.run([ 'nodemon', 'watch' ]);
-  });
 
   ////////////////////////////////////////////////////
   // Main grunt tasks
   ////////////////////////////////////////////////////
+  grunt.registerTask('server-dev', function (target) {
+    grunt.task.run([ 'nodemon', 'watch' ]);
+  });
 
   grunt.registerTask('test', [
     'mochaTest'
@@ -87,9 +92,7 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('deploy', [
-    // add your deploy tasks here
-  ]);
+  grunt.registerTask('deploy', ['shell']);
 
 
 };
